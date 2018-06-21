@@ -1,0 +1,14 @@
+{
+  "name": "angular-jwt",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jzywien/angular-jwt.git",
+  "author": "jzywien <jzywien@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@angular/cli": "^6.0.8"
+  },
+  "scripts": {
+    "ng": "ng"
+  }
+}
