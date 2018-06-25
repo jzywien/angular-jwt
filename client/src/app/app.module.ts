@@ -2,31 +2,35 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
-import { TodoListComponent } from './todo-list/todo-list.component';
-import { UserListComponent } from './user-list/user-list.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { TodoService } from './todo.service';
-import { UserService } from './user.service';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodoListComponent,
-    UserListComponent,
     LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('access_token'),
+        whitelistedDomains: ['localhost:4000'],
+        blacklistedRoutes: ['localhost:4000/api/auth']
+      }
+    })
   ],
   providers: [
-    TodoService,
-    UserService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
